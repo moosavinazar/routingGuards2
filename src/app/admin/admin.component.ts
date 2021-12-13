@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  public onUserLogin(event: Event, email: string, password: string) {
+    event.preventDefault();
+    if (email === 'hasan@hasan.com' && password === '123') {
+      this.authService.login();
+    } else {
+      this.router.navigate(['/not-authorized']);
+    }
   }
 
 }
